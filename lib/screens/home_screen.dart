@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hng_two/providers/theme_provider.dart';
 import 'package:hng_two/screens/detail_screen.dart';
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: TextField(
                     controller: _searchController,
                     decoration: const InputDecoration(
@@ -96,6 +97,82 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     onChanged: _filterCountries,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Consumer<ThemeProvider>(
+                        builder: (context, themeProvider, child) {
+                          return InkWell(
+                            onTap: () => languageFilterBottomSheet(context),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: themeProvider.borderColor,
+                                  // Dynamic border color
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.0, vertical: 8),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.language,
+                                    size: 24,
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    _filteredCountries.isNotEmpty
+                                        ? _filteredCountries[0]['languages']
+                                            ['eng']
+                                        : 'EN',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Consumer<ThemeProvider>(
+                        builder: (context, themeProvider, child) {
+                          return InkWell(
+                            onTap: () => continentZoneBottomSheet(context),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: themeProvider.borderColor,
+                                  // Dynamic border color
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12.0, vertical: 8),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.filter_alt_outlined,
+                                    size: 24.0,
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    'Filter',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -145,4 +222,251 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
     );
   }
+}
+
+void languageFilterBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Container(
+            height: 750,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Languages',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w700, fontSize: 20),
+                      ),
+                      InkWell(
+                          child: Icon(
+                            Icons.close_rounded,
+                            size: 18.0,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Bahasa',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Deutsh',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'English',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Espanol',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Francaise',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Italiano',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Portugues',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Pycckuu',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.radio_button_off_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      });
+}
+
+void continentZoneBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Container(
+            height: 220,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Filter',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.w700, fontSize: 20),
+                      ),
+                      InkWell(
+                          child: Icon(
+                            Icons.close_rounded,
+                            size: 18.0,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Continent',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Time Zone',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        size: 18.0,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      });
 }

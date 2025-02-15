@@ -58,7 +58,7 @@ The app uses the following dependencies:
 
 Try the app directly in your browser using Appetize.io:
 
--Android demo:  https://appetize.io/app/b_zvzfigjzr76evs2akvknssudx4
+-Android demo:  https://appetize.io/app/b_tftl2owrqi7zblxpdxenu4qrkq
 
 ## Contributing
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
@@ -9,6 +10,7 @@ class ThemeProvider with ChangeNotifier {
     _isDarkMode = !_isDarkMode;
     notifyListeners();
   }
+  Color get borderColor => _isDarkMode ? Color(0xFFA9B8D4)! : Colors.grey[300]!;
 
   ThemeData getTheme() {
     return _isDarkMode ? _darkTheme : _lightTheme;
@@ -29,6 +31,7 @@ class ThemeProvider with ChangeNotifier {
             color: Color(0xFFF2F4F7),
           ),
         ),
+
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Color(0xFF1E2C41),
           filled: true,
@@ -37,7 +40,15 @@ class ThemeProvider with ChangeNotifier {
             borderSide: BorderSide.none,
           ),
         ),
-        textTheme: const TextTheme(
+    iconTheme: IconThemeData(
+        color: Colors.white),
+
+    textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+              color: Color(0xFFFFFFFF),
+              fontFamily: 'Axiforma',
+              fontWeight: FontWeight.w500,
+              fontSize: 12.0),
           bodyMedium: TextStyle(
               color: Color(0xFFF2F4F7),
               fontFamily: 'Axiforma',
@@ -74,7 +85,13 @@ class ThemeProvider with ChangeNotifier {
             borderSide: BorderSide.none,
           ),
         ),
+        iconTheme: IconThemeData(color: Color(0xFF000000)),
         textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+              color: Color(0xFF000000),
+              fontFamily: 'Axiforma',
+              fontWeight: FontWeight.w500,
+              fontSize: 12.0),
           bodyMedium: TextStyle(
               color: Color(0xFF1C1917),
               fontFamily: 'Axiforma',

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hng_two/widgets/build_text.dart';
 import 'package:intl/intl.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class DetailScreen extends StatelessWidget {
   final dynamic country;
@@ -9,6 +12,9 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double lat = country['latlng'][0];
+    final double lng = country['latlng'][1];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -20,13 +26,63 @@ class DetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8), // Border radius of 8
-              child: Image.network(
-                country['flags']['png'] ?? 'https://flagcdn.com/w320/ng.png',
-                width: 380,
-                height: 200,
-                fit: BoxFit.cover,
+            CarouselSlider(
+              items: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    country['flags']['png'] ??
+                        'https://flagcdn.com/w320/ng.png',
+                    width: 380,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // Coat of Arms
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    country['coatOfArms']['png'] ??
+                        'https://via.placeholder.com/150',
+                    width: 380,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // Interactive Map
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: FlutterMap(
+                    options: MapOptions(
+                      center: LatLng(lat, lng),
+                      zoom: 5.0,
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        userAgentPackageName: 'com.example.app',
+                      ),
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: LatLng(lat, lng),
+                            builder: (ctx) => const Icon(Icons.location_on,
+                                color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+              options: CarouselOptions(
+                height: 200.0,
+                autoPlay: true,
+                aspectRatio: 16 / 9,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enableInfiniteScroll: true,
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
               ),
             ),
             const SizedBox(height: 24),
@@ -56,13 +112,6 @@ class DetailScreen extends StatelessWidget {
                   country['capital'] != null ? country['capital'][0] : 'N/A',
                 ),
                 const SizedBox(height: 4.0),
-                if (country['president'] != null)
-                  Column(
-                    children: [
-                      buildRichText('President', country['president']),
-                      const SizedBox(height: 4.0),
-                    ],
-                  ),
                 if (country['president'] != null)
                   Column(
                     children: [

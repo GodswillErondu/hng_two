@@ -5,8 +5,17 @@ The **Hng two App** is a Flutter-based mobile application that allows users to e
 ## Features
 
 - **Country List**: Displays a list of countries with their flags and capitals.
+
 - **Search Functionality**: Allows users to search for countries by name.
+
+- **Filter by Language**: Filter countries based on their official languages.
+
+- **Filter by Continent**: Filter countries by their continent.
+
+- **Filter by Time Zone**: Filter countries by their time zone.
+
 - **Dark/Light Theme**: Supports both dark and light themes, which can be toggled via a button in the app bar.
+
 - **Country Details**: Tapping on a country in the list navigates to a detailed view of the country (not implemented in this code snippet).
 
 ## Getting Started
@@ -53,12 +62,23 @@ The app uses the following dependencies:
 - **Toggle Theme**: Use the theme toggle button in the app bar to switch between dark and light modes.
 
 - **View Country Details**: Tap on a country in the list to navigate to its detailed view.
--
+
+- **Filter Button**: Tap the filter button to open the filter bottom sheet.
+
+### Filter Bottom Sheet
+
+- **Continent**: Tap "Continent" to open a list of continents and select one.
+
+- **Time Zone**: Tap "Time Zone" to open a list of time zones and select one.
+
+- **Reset**: Tap "Reset" to clear all filters.
+
+Show Results: Tap "Show Results" to apply the selected filters and close the bottom sheet.
 ## 📱 Live Demo
 
 Try the app directly in your browser using Appetize.io:
 
--Android demo:  https://appetize.io/app/b_tftl2owrqi7zblxpdxenu4qrkq
+-Android demo:  https://appetize.io/app/b_zovyc5zpyywo45v4koqgywvel4
 
 ## Contributing
 

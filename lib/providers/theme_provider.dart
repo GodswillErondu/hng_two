@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class ThemeProvider with ChangeNotifier {
   bool _isDarkMode = false;
@@ -10,6 +11,7 @@ class ThemeProvider with ChangeNotifier {
     _isDarkMode = !_isDarkMode;
     notifyListeners();
   }
+
   Color get borderColor => _isDarkMode ? Color(0xFFA9B8D4)! : Colors.grey[300]!;
 
   ThemeData getTheme() {
@@ -31,7 +33,6 @@ class ThemeProvider with ChangeNotifier {
             color: Color(0xFFF2F4F7),
           ),
         ),
-
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Color(0xFF1E2C41),
           filled: true,
@@ -40,10 +41,16 @@ class ThemeProvider with ChangeNotifier {
             borderSide: BorderSide.none,
           ),
         ),
-    iconTheme: IconThemeData(
-        color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
 
-    textTheme: const TextTheme(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF00FFFFFF),
+              foregroundColor: Color(0xFFF2F4F7),
+              shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0),
+                  side: BorderSide(color: Color(0xFFF2F4F7)))),
+        ),
+        textTheme: const TextTheme(
           bodyLarge: TextStyle(
               color: Color(0xFFFFFFFF),
               fontFamily: 'Axiforma',
@@ -86,6 +93,13 @@ class ThemeProvider with ChangeNotifier {
           ),
         ),
         iconTheme: IconThemeData(color: Color(0xFF000000)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFFFFF),
+              foregroundColor: Color(0xFF1C1917),
+              shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0),
+                  side: BorderSide(color: Color(0xFF1C1917)))),
+        ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(
               color: Color(0xFF000000),
